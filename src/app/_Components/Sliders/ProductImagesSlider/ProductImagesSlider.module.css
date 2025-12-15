@@ -1,0 +1,25 @@
+.sliderWrapper :global(.swiper-button-next::after),
+.sliderWrapper :global(.swiper-button-prev::after) {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sliderWrapper :global(.swiper-pagination-bullet-active) {
+  background: white !important;
+  opacity: 1;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.sliderWrapper :global(.swiper-pagination-bullet) {
+  background: #000 !important;
+  width: 8px;
+  height: 8px;
+}
+
+.sliderWrapper :global(.swiper-pagination-horizontal) {
+  bottom: 10px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
