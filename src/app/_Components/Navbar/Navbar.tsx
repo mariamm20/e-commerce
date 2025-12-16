@@ -28,10 +28,11 @@ export default function Navbar() {
   const x = useSession();
   const {cartItemsNumber} = useContext(CartContext)
   const {wishlistItemsNumber} = useContext(WishlistContext)
+  console.log(cartItemsNumber)
   return (
     <nav className="w-full bg-gray-100 py-3 md:px-24 px-4 flex justify-between items-center">
       <Link href="/" className="text-lg font-bold">
-        Logo
+        E-Commerce
       </Link>
 
       <div className="hidden md:flex flex-1 justify-center">

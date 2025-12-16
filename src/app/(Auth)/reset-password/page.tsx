@@ -39,7 +39,7 @@ export default function ResetPassword() {
 
 
     return (
-        <main className="antialiased bg-slate-200 h-screen py-10">
+        <main className="antialiased bg-white h-screen py-10">
             <div className="max-w-lg mx-auto  bg-white p-8 rounded-xl shadow shadow-slate-300">
                 <h1 className="text-4xl font-medium">Reset password</h1>
                 <p className="text-slate-500">Fill up the form to reset the password</p>

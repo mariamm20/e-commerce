@@ -6,6 +6,7 @@ import AuthProvider from "@/context/AuthProvider";
 import { CartContextProvider } from "@/context/CartContext";
 import { Toaster } from "@/components/ui/sonner"
 import { WishlistContextProvider } from "@/context/WishlistContext";
+import Footer from "./_Components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +31,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`min-h-screen flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
           <CartContextProvider>
-          <WishlistContextProvider>
-            <Navbar/>
-            {children}
-            <Toaster position="bottom-right" richColors />
-          </WishlistContextProvider>
+            <WishlistContextProvider>
+              <Navbar />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+              <Toaster position="bottom-right" richColors />
+            </WishlistContextProvider>
           </CartContextProvider>
         </AuthProvider>
       </body>

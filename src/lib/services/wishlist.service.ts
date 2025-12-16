@@ -16,6 +16,9 @@ export async function getWishlist(){
 
 export async function addToWishlist(productId:string){
     const token = await getMyToken();
+    if(!token){
+        return {status:"unauthenticated" as const}
+    }
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/wishlist',{
         method: "POST",
         headers: {
@@ -24,9 +27,11 @@ export async function addToWishlist(productId:string){
         },
         body: JSON.stringify({productId:productId})
     })
-    if(!res.ok) return null;
+    if(!res.ok){
+        return {status:"error" as const}
+    }
     const data : IWishlistAddApiResponse = await res.json();
-    return data
+    return {status:"success" as const,data}
 }
 
 export async function removeFromWishlist(productId:string){

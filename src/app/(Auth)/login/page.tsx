@@ -1,12 +1,15 @@
 'use client'
+import Wishlist from "@/app/wishlist/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CartContext } from "@/context/CartContext";
+import { WishlistContext } from "@/context/WishlistContext";
 import { ILogin } from "@/lib/interfaces/IAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod"
 export default function Login() {
@@ -14,6 +17,8 @@ export default function Login() {
   const [error , setError] = useState<null | string>(null);
   const [loading , setLoading] = useState(false);
   const router = useRouter();
+  const {refreshCart} = useContext(CartContext)
+  const {refreshWishlist} = useContext(WishlistContext)
 
   const schema = z.object({
     email: z.email().nonempty("Email is required"),
@@ -37,6 +42,8 @@ export default function Login() {
       password: values.password
     })
     if(res?.ok){
+      refreshCart();
+      refreshWishlist();
       router.push("/");
     }else{
       setError("Invalid email or password")

@@ -37,8 +37,13 @@ export default function AddToWishlistBtn({ productId }: { productId: string }) {
     }
     else {
       setLikedLoading(true)
-      const wishlistData: IWishlistAddApiResponse | null = await addToWishlist(productId)
-      if (!wishlistData) {
+      const wishlistData: IWishlistAddApiResponse | null | { status: string } = await addToWishlist(productId)
+      if (wishlistData.status === "unauthenticated") {
+        toast.error("Login first to add to wishlist")
+        setLikedLoading(false)
+        return
+      }
+      if (wishlistData.status === "error") {
         toast.error("Something went wrong")
         setLikedLoading(false)
         return

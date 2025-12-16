@@ -20,7 +20,13 @@ export default function AddToCardBtn({ productId }: { productId: string }) {
 
     const data = await addToCart(productId)
 
-    if (!data) {
+    if (data.status === "unauthenticated") {
+      toast.error("Login first to add to cart")
+      setLoading(false)
+      return
+    }
+
+    if (data.status === "error") {
       toast.error("Failed to add to cart")
       setLoading(false)
       return
@@ -29,7 +35,7 @@ export default function AddToCardBtn({ productId }: { productId: string }) {
     await refreshCart()
 
     toast.success("Added to cart 🎉", {
-      description: `You now have ${data.numOfCartItems} items in your cart.`,
+      description: `You now have ${data.data.numOfCartItems} items in your cart.`,
     })
 
     setLoading(false)

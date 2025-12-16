@@ -37,6 +37,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
 
   async function refreshCart() {
     const cartRes: ICartApiResponse | null = await getLoggedUserCart()
+    console.log(cartRes)
     if (cartRes && cartRes.status === "success") {
       setCartItemsNumber(cartRes.numOfCartItems)
       setCartID(cartRes.cartId)

@@ -19,7 +19,9 @@ export async function getLoggedUserCart() {
 
 export async function addToCart(productId:string) {
     const token = await getMyToken();
-
+    if (!token) {
+        return { status: "unauthenticated" as const };
+    }
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/cart', {
         method: "POST",
         headers: {
@@ -30,9 +32,10 @@ export async function addToCart(productId:string) {
     })
 
     const data: ICartApiResponse = await res.json();
-    if (!res.ok) return null;
-    console.log(data)
-    return data
+     if (!res.ok) {
+        return { status: "error" as const };
+    }
+    return { status: "success" as const, data };
 }
 
 export async function deleteCartItem(productId:string) {
