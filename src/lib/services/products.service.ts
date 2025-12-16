@@ -3,7 +3,6 @@ import { IProduct } from "../interfaces/IProduct";
 
 export async function getProducts(params: Record<string, unknown>) {
     try {
-        console.log(params);
 
         const search = new URLSearchParams();
 
@@ -14,7 +13,6 @@ export async function getProducts(params: Record<string, unknown>) {
             search.append(key, value.toString());
           }
         });
-        console.log("search:", search);
 
         const res = await fetch(
             `https://ecommerce.routemisr.com/api/v1/products?${search}`
@@ -23,7 +21,7 @@ export async function getProducts(params: Record<string, unknown>) {
         if (!res.ok) throw new Error("Failed to fetch data");
 
         const data: IApiResponse<IProduct[]> = await res.json();
-        // console.log(data);
+
         return data;
 
     } catch (error) {
